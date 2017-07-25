@@ -182,6 +182,7 @@ Internet-DraSignaling Prefix Origin Validation Results from   April 2017
 
    Simple Tagging:  The prefix origin validation state is tagged to the
        route as described in Section 2.
+       
        This mode of operation is like the traditional way route servers
        work, however, the prefix origin validation state information is
        additionally available for peers.
@@ -207,16 +208,18 @@ Internet-DraSignaling Prefix Origin Validation Results from   April 2017
        algorithm.  This puts prefix origin validation on top of the best
        path selection.
 
-
    A route server MUST support the Simple Tagging mode of operation.
-   Other modes of operation are OPTIONAL.  The mode of operation MAY be
+   Other modes of operation are OPTIONAL. The mode of operation MAY be
    configured by the route server operator for a route server instance
    or for each BGP session with a peer separately.
 
-   Peers receiving prefixes via route servers typically use them as 
-   backup or "catch-all" paths, with their primary connectivity 
-   happening over direct EBGP sessions, so path hiding, as originally
-   discussed in [RFC7947], should not impact end-to-end connectivity. 
+   Path hiding, as originally discussed in [RFC7947], may impact 
+   end-to-end connectivity for peers receiving prefixes via route servers
+   if the best path selected contains a prefix with an "invalid" prefix
+   origin validation state, and subsequently dropped, either at the
+   peer (Simple Tagging operation mode) or the route server itself
+   (Dropping and Tagging operation mode).
+
    However, these modes of operation might be used in combination with 
    [RFC7911] in order to allow a peer to receive all routes and take the 
    routing decision by itself.  
