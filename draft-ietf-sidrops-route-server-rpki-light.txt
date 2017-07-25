@@ -84,7 +84,7 @@ Table of Contents
      5.1.  Local Routing Decision Process  . . . . . . . . . . . . .   4
      5.2.  Route Server Receiving the EBGP Prefix Origin Validation
            State Extended Community  . . . . . . . . . . . . . . . .   4
-     5.3.  Information about Validity of an EBGP Prefix Origin Not
+     5.3.  Information about Validity of a BGP Prefix Origin Not
            Available at a Route-Server . . . . . . . . . . . . . . .   5
      5.4.  Error Handling at Peers . . . . . . . . . . . . . . . . .   5
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
