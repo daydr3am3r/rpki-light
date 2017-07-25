@@ -82,9 +82,9 @@ Table of Contents
        Server to Peers . . . . . . . . . . . . . . . . . . . . . . .   4
    5.  Operational Recommendations . . . . . . . . . . . . . . . . .   4
      5.1.  Local Routing Decision Process  . . . . . . . . . . . . .   4
-     5.2.  Route Server Receiving the BGP Prefix Origin Validation
+     5.2.  Route Server Receiving the EBGP Prefix Origin Validation
            State Extended Community  . . . . . . . . . . . . . . . .   4
-     5.3.  Information about Validity of a BGP Prefix Origin Not
+     5.3.  Information about Validity of an EBGP Prefix Origin Not
            Available at a Route-Server . . . . . . . . . . . . . . .   5
      5.4.  Error Handling at Peers . . . . . . . . . . . . . . . . .   5
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
@@ -181,8 +181,8 @@ Internet-DraSignaling Prefix Origin Validation Results from   April 2017
    following modes of operation:
 
    Simple Tagging:  The prefix origin validation state is tagged to the
-       route as described in Section 3.
-       This mode of operation is like the tradional way route servers
+       route as described in Section 2.
+       This mode of operation is like the traditional way route servers
        work, however, the prefix origin validation state information is
        additionally available for peers.
 
@@ -190,16 +190,17 @@ Internet-DraSignaling Prefix Origin Validation Results from   April 2017
        state is "invalid" (according to [RFC6811]) are dropped by the
        route server.  Routes which show a prefix origin validation state
        of "not found" and "valid" (according to [RFC6811]) are tagged
-       accordingly to Section 3.
-       Security is higher rated than questionable reachability of a
-       prefix by this mode of operation.
-
+       accordingly, as discussed in Section 2.
+       
+       In this mode of operation, security is rated higher than 
+       questionable reachability of a prefix.
+ 
    Prioritizing and Tagging:  If the route server learned for a
        particular prefix more than one route it removes firstly the set
        of "invalid" routes and secondly the "not found" routes unless
        the set of routes is empty.  Based on the set of routes left over
        the BGP best path section algorithm is executed.  The selected
-       route is marked accordinly to Section 3.
+       route is marked accordingly to Section 2.
        The BGP best path selection algorithm is changed by this mode of
        operation in such a way that "valid" routes are preferred even if
        they are unfavorable by the traditional best path selection
@@ -210,16 +211,15 @@ Internet-DraSignaling Prefix Origin Validation Results from   April 2017
    A route server MUST support the Simple Tagging mode of operation.
    Other modes of operation are OPTIONAL.  The mode of operation MAY be
    configured by the route server operator for a route server instance
-   or for each BGP session with a peer seperately.
+   or for each BGP session with a peer separately.
 
-   These mode of operations might be used in combination with [RFC7911]
-   in order to allow a peer to receive all routes and take the routing
-   decision by itself.
-
-
-
-
-
+   Peers receiving prefixes via route servers typically use them as 
+   backup or "catch-all" paths, with their primary connectivity 
+   happening over direct EBGP sessions, so path hiding, as originally
+   discussed in [RFC7947], should not impact end-to-end connectivity. 
+   However, these modes of operation might be used in combination with 
+   [RFC7911] in order to allow a peer to receive all routes and take the 
+   routing decision by itself.  
 
 
 King, et al.            Expires October 12, 2017                [Page 4]
